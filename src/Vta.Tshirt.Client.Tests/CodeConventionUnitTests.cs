@@ -1,7 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Reflection;
 using Vta.Tshirt.Client.Logic;
-using Vta.Tshirt.Client.Logic.Features.Start;
-using Vta.Tshirt.Services;
 
 namespace Vta.Tshirt.Client.Tests;
 
@@ -13,28 +11,46 @@ public class CodeConventionUnitTests
     }
 
     [Test]
-    public void Test2()
+    public void CodeConventionTest1()
     {
-        foreach (Type vm in GetViewModelMarkers())
+        foreach (Type vm in GetViewModelMarkers<IViewModelMarker>())
         {
-            EnsureOnlyOneObservableModel(vm);
+            EnsureModelInheritance(vm);
         }
     }
 
-    private void EnsureOnlyOneObservableModel(Type type)
+    private void EnsureModelInheritance(Type type)
     {
-        var model = (type.GetProperties()
-            .Where(x => x.Name == "Model" && x.DeclaringType.IsAssignableFrom(typeof(ObservableObject)))
-            .SingleOrDefault());
+        var properties = type.GetProperties();
+        var model = properties?
+            .Where(x => x.Name == "Model")
+            .SingleOrDefault();
 
-        if(model is null)
+        if(model == null ||
+            model.GetType().IsAssignableFrom(typeof(BaseModel)))
         {
-            Assert.Fail("Du har ikke en Model property som nedarver fra ObservableObject");
+            Assert.Fail("Model property must inherit from BaseModel class.");
         }
     }
 
-    private IEnumerable<Type> GetViewModelMarkers()
+    private IEnumerable<Type> GetViewModelMarkers<T>()
     {
-        return GetType().Assembly.GetExportedTypes().Where(x => x.IsAssignableTo(typeof(IViewModelMarker)));
+        var hostAssembly = Assembly
+            .GetExecutingAssembly().GetName().Name.Replace(".Tests", "");
+
+        var assembly = Assembly
+            .GetExecutingAssembly()
+            .GetReferencedAssemblies()
+            .Select(Assembly.Load)
+            .Single(x => x.GetName().Name == hostAssembly);
+
+        var typeName = typeof(T).Name;
+
+        var types = assembly
+            .GetExportedTypes()
+            .Where(x => x.IsAssignableTo(typeof(T)) && x.Name != typeName)
+            .ToList();
+
+        return types;
     }
 }

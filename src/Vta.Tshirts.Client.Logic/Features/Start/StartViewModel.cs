@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Vta.Tshirt.Services;
-using Vta.Tshirt.Services.Entities;
+﻿using Vta.Tshirt.Services;
 
 namespace Vta.Tshirt.Client.Logic.Features.Start;
 
@@ -31,7 +28,6 @@ public sealed partial class StartViewModel : IViewModelMarker
         }
     }
 
-    [RelayCommand]
     public async Task SelectTshirt()
     {
         Model.SelectedTshirt = Model.Entities.First();
