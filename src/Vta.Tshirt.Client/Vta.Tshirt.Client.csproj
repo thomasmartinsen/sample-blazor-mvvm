@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\Start\Components\**" />
+    <Compile Remove="Features\Start\Handlers\**" />
+    <Content Remove="Features\Start\Components\**" />
+    <Content Remove="Features\Start\Handlers\**" />
+    <EmbeddedResource Remove="Features\Start\Components\**" />
+    <EmbeddedResource Remove="Features\Start\Handlers\**" />
+    <None Remove="Features\Start\Components\**" />
+    <None Remove="Features\Start\Handlers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vta.Tshirt.Services\Vta.Tshirt.Services.csproj" />
+    <ProjectReference Include="..\Vta.Tshirts.Client.Logic\Vta.Tshirt.Client.Logic.csproj" />
+  </ItemGroup>
+
+</Project>

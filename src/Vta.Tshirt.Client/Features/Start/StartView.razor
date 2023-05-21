@@ -1,0 +1,42 @@
+﻿@page "/start"
+@using Vta.Tshirt.Client.Logic.Features.Start
+@inject StartViewModel ViewModel
+
+<h3>t-shirts</h3>
+
+@if (ViewModel.Model.IsLoading)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <button @onclick="ViewModel.SelectTshirt">Select</button>
+    <label>@ViewModel.Model.TshirtColor</label>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entity in ViewModel.Model.Entities)
+            {
+                <tr>
+                    <td>@entity.Id</td>
+                    <td>@entity.Size</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.LoadDataAsync();
+    }
+}
