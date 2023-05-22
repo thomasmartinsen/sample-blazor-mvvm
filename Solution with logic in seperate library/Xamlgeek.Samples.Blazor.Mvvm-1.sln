@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02FFA61E-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{17E823D6-1D68-4E1D-8CC9-5B3F6A04DAEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vta.Tshirt.Client.Logic", "src\Vta.Tshirts.Client.Logic\Vta.Tshirt.Client.Logic.csproj", "{85690B70-ED12-423C-8EE9-E95AAF5ACDA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vta.Tshirt.Client.Logic", "src\Vta.Tshirt.Client.Logic\Vta.Tshirt.Client.Logic.csproj", "{85690B70-ED12-423C-8EE9-E95AAF5ACDA8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vta.Tshirt.Client", "src\Vta.Tshirt.Client\Vta.Tshirt.Client.csproj", "{F1B0F917-357C-46C8-BD99-F10F38DF2317}"
 EndProject
